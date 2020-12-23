@@ -1,3 +1,6 @@
+library(tidyverse)
+library(rgcam)
+
 nutcont<-read_csv("inputs/NutCont_region_commod.csv")
 nfix<-read_csv("inputs/Nfix_commod_region.csv")
 
