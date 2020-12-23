@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<queries>
+  <supplyDemandQuery title="water withdrawals by sector">
+      <axis1 name="sector">sector</axis1>
+      <axis2 name="Year">demand-physical[@vintage]</axis2>
+      <xPath buildList="true" dataName="input" group="false" sumAll="false">*[@type='sector' and not(contains(@name, 'water_td'))]//*[@type='input' (:collapse:) and contains(@name,'water_td') and ends-with(@name,'_W')]/demand-physical/node()</xPath>
+      <comments/>
+      <labelRewriteList append-values="false">
+          <level name="sector">
+              <rewrite from="elec_Gen_III" to="electricity"/>
+              <rewrite from="elec_CSP_storage" to="electricity"/>
+              <rewrite from="elec_refined liquids (steam/CT)" to="electricity"/>
+              <rewrite from="elec_geothermal" to="electricity"/>
+              <rewrite from="elec_refined liquids (CC)" to="electricity"/>
+              <rewrite from="elec_Gen_II_LWR" to="electricity"/>
+              <rewrite from="elec_gas (steam/CT)" to="electricity"/>
+              <rewrite from="elec_coal (IGCC)" to="electricity"/>
+              <rewrite from="elec_gas (CC)" to="electricity"/>
+              <rewrite from="elec_biomass (IGCC)" to="electricity"/>
+              <rewrite from="elec_coal (conv pul)" to="electricity"/>
+              <rewrite from="elec_CSP" to="electricity"/>
+              <rewrite from="elec_biomass (conv)" to="electricity"/>
+          </level>
+      </labelRewriteList>
+  </supplyDemandQuery>
+  <supplyDemandQuery title="irrigation water withdrawals by crop type and land region">
+   <axis1 name="sector">sector</axis1>
+   <axis2 name="Year">demand-physical[@vintage]</axis2>
+   <xPath buildList="true" dataName="input" group="false" sumAll="false">*[@type='sector' and not(contains(@name, 'water_td_irr'))] *[@type='subsector']//*[@type='input' and contains(@name, 'water_td_irr')  and ends-with(@name, '_W')]/demand-physical/node()</xPath>
+   <comments/>
+  </supplyDemandQuery>
+  <supplyDemandQuery title="irrigation water withdrawals by ag tech">
+   <axis1 name="sector">sector</axis1>
+   <axis2 name="Year">demand-physical[@vintage]</axis2>
+   <xPath buildList="true" dataName="input" group="false" sumAll="false">*[@type='sector' and not(contains(@name, 'water_td_irr'))]/*[@type='subsector']/ *[@type='technology']/ *[@type='input' and contains(@name, 'water_td_irr') and ends-with(@name, '_W')]/ demand-physical/node()</xPath>
+   <comments/>
+  </supplyDemandQuery>
+  <supplyDemandQuery title="irrigation water consumption by crop type and land region">
+   <axis1 name="sector">sector</axis1>
+   <axis2 name="Year">demand-physical[@vintage]</axis2>
+   <xPath buildList="true" dataName="input" group="false" sumAll="false">*[@type='sector' and not(contains(@name, 'water_td_irr'))]/*[@type='subsector']//*[@type='input' and contains(@name, 'water_td_irr')  and ends-with(@name, '_C')]/demand-physical/node()</xPath>
+   <comments/>
+  </supplyDemandQuery>
+  <supplyDemandQuery title="irrigation water consumption by ag tech">
+   <axis1 name="sector">sector</axis1>
+   <axis2 name="Year">demand-physical[@vintage]</axis2>
+   <xPath buildList="true" dataName="input" group="false" sumAll="false">*[@type='sector' and not(contains(@name, 'water_td_irr'))]/*[@type='subsector']/*[@type='technology']/ *[@type='input' and contains(@name, 'water_td_irr') and ends-with(@name, '_C')]/
+  demand-physical/node()</xPath>
+   <comments/>
+  </supplyDemandQuery>
+  <supplyDemandQuery title="fertilizer consumption by crop type">
+   <axis1 name="sector">sector</axis1>
+   <axis2 name="Year">demand-physical[@vintage]</axis2>
+   <xPath buildList="true" dataName="input" group="false" sumAll="false">*[@type='sector' and not (@name='Exports_N fertilizer')]// *[@type='input' and (@name='N fertilizer')]/demand-physical/node()</xPath>
+   <comments/>
+  </supplyDemandQuery>
+  <supplyDemandQuery title="fertilizer consumption by ag tech">
+   <axis1 name="sector">sector</axis1>
+   <axis2 name="Year">demand-physical[@vintage]</axis2>
+   <xPath buildList="true" dataName="input" group="false" sumAll="false">*[@type='sector' and not (@name='Exports_fertilizer')]/*[@type='subsector']/*[@type='technology']/*[@type='input' and (@name='N fertilizer')]/demand-physical/node()</xPath>
+   <comments/>
+  </supplyDemandQuery>
+  <supplyDemandQuery title="P_fertilizer consumption by crop type"><axis1 name="sector">sector</axis1><axis2 name="Year">demand-physical[@vintage]</axis2><xPath buildList="true" dataName="input" group="false" sumAll="false">*[@type='sector']//*[@type='input' and (@name='P_fertilizer')]/demand-physical/node()</xPath><comments/>
+  </supplyDemandQuery>
+  <supplyDemandQuery title="P fertilizer consumption by ag tech">
+    <axis1 name="sector">sector</axis1>
+    <axis2 name="Year">demand-physical[@vintage]</axis2>
+    <xPath buildList="true" dataName="input" group="false" sumAll="false">*[@type='sector']/
+              *[@type='subsector']/*[@type='technology']/*[@type='input' and (@name='P_fertilizer')]/demand-physical/node()</xPath><comments/>
+  </supplyDemandQuery>
+  <supplyDemandQuery title="ag production by crop type">
+      <axis1 name="sector">sector[@name]</axis1>
+      <axis2 name="Year">physical-output[@vintage]</axis2>
+      <xPath buildList="true" dataName="output" group="false" sumAll="false">*[@type='sector' and (local-name()='AgSupplySector')]//output-primary/physical-output/node()</xPath>
+      <comments>primary output only (no residue biomass)</comments>
+  </supplyDemandQuery>
+  <supplyDemandQuery title="ag production by subsector (land use region)">
+      <axis1 name="technology">technology[@name]</axis1>
+      <axis2 name="Year">physical-output[@vintage]</axis2>
+      <xPath buildList="true" dataName="output" group="false" sumAll="false">*[@type='sector' and (local-name()='AgSupplySector')]/*[@type='subsector']//output-primary/physical-output/node()</xPath>
+      <comments>primary output only (no residue biomass)</comments>
+  </supplyDemandQuery>
+  <supplyDemandQuery title="ag production by tech">
+      <axis1 name="technology">technology[@name]</axis1>
+      <axis2 name="Year">physical-output[@vintage]</axis2>
+      <xPath buildList="true" dataName="output" group="false" sumAll="false">*[@type='sector' and (local-name()='AgSupplySector')]/ *[@type='subsector']/*[@type='technology']/ output-primary/physical-output/node()</xPath>
+      <comments/>
+  </supplyDemandQuery>
+  <supplyDemandQuery title="residue biomass production">
+      <axis1 name="sector">sector[@name]</axis1>
+      <axis2 name="Year">physical-output[@vintage]</axis2>
+      <xPath buildList="false" dataName="output" group="false" sumAll="false">*[@type='sector']//output-residue-biomass/physical-output/node()</xPath>
+  </supplyDemandQuery>
+</queries>
