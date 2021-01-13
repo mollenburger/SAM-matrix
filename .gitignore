@@ -1,4 +1,7 @@
+# ignore
+.DS_Store
+.Trashes
+*.swp
 .Rproj.user
-.Rhistory
 .RData
-.Ruserdata
+.Rhistory
