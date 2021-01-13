@@ -43,15 +43,16 @@ ui = fluidPage(
 
 # Define the server
 server = function(input, output, session) {
-  #select relevant data
-  plot_data<-regions_shape[regions_shape$scenari==chosescen &
-                           regions_shape$year==choseyear &
-                           regions_shape$variabl==chosevar,]
+
+
   # Create the world map
   tmap_mode("view")
   tm_style('white')
-  output$my_tmap = renderTmap({tm_shape(plot_data)+
-      tm_polygons('value',title=paste(chosevar," (",plot_data$Unit[1],")"))})
+  output$my_tmap = renderTmap({
+    tm_shape(regions_shape[regions_shape$scenari==input$chosescen &
+                            regions_shape$year==input$choseyear &
+                            regions_shape$variabl==input$chosevar,])+
+      tm_polygons('value', title=paste0(input$chosevar))})
   }
 
 # Finally, we can run our app by either clicking "Run App" in the top of our RStudio IDE, or by running
