@@ -1,0 +1,5 @@
+crop, price_unit, prod_unit,conversion
+biomass, $/GJ, EJ, 1e9
+crops, $/kg, Mt, 1e9
+forest, $/m3, billion m3, 1e9
+animal, $/kg, Mt, 1e9

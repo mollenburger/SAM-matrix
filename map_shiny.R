@@ -20,16 +20,23 @@ ui = fluidPage(
       # First input: Scenario
       selectInput(inputId = "chosescen",
                   label = "Choose the future scenario to display:",
-                  choices = list("Yield Gap Closure" = "PotYld", "Dietary Transition" = "DietaryTransition","Reference"="Reference")),
+                  choices = list("Yield Gap Closure" = "PotYld",
+                                 "Dietary Transition" = "DietaryTransition",
+                                 "Reference"="Reference")),
 
       selectInput(inputId = "chosevar",
                   label = "Choose the indicator to display:",
-                  choices = list("N surplus" = "Nsur", "P surplus" = "Psur")),
+                  choices = list("N surplus" = "Nsur",
+                                 "P surplus" = "Psur",
+                                 "Forest area change fraction"="forest_frac",
+                                 "Emissions (gwp"="Emissions (gwp)",
+                                 "Export percent"="Export percent",
+                                 "Ag labor productivity"="Ag Labor Productivity",
+                                 "Food affordability"="Food affordability")),
 
-      selectInput(inputId = "choseyear",
+      sliderInput(inputId = "choseyear",
                   label = "Choose the year to display:",
-                  choices = list("Base Year (2015)" = 2015, "Mid (2035)" = 2035, "End (2050)"=2050))
-    ),
+                  min=2015, max=2050, step=10, value=2030)),
 
     # Main panel for displaying outputs
     mainPanel(

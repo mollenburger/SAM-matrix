@@ -1,9 +1,10 @@
 library(rgcam)
 library(tidyverse)
 library(assertthat)
+library(betareg)
 SAMout<-loadProject(proj='./outdata/SAM-matrix_data.dat')
 
-gcam_home='/Users/mollenburger/git/gcam-sam/'
+gcam_home='~/git/gcam-sam/'
 
 ###FILTERS###
 allcrops=c('Corn','FiberCrop','Fruits', 'Legumes','MiscCrop','NutsSeeds','OilCrop','OtherGrain','PalmFruit','Rice','RootTuber',
@@ -17,10 +18,14 @@ excrops = c('Corn','OilCrop','Rice','Wheat')
 uncropped<-c('Forest','Grassland','OtherArableLand','Pasture','ProtectedGrassland','ProtectedShrubland','ProtectedUnmanagedForest','ProtectedUnmanagedPasture','Shrubland','UnmanagedForest','UnmanagedPasture')
 biomass = c('biomass_grass','biomass_tree')
 fodder=c('FodderHerb','FodderGrass')
+animals=c('Dairy','Beef','Poultry','Pork','SheepGoat')
 
 metaregions<-read_csv('inputs/metaregions.csv')
 GCAMreg<-read_csv(paste0(gcam_home,"input/gcamdata/inst/extdata/common/GCAM_region_names.csv"),skip=6)
 basin_glu<-read_csv(paste0(gcam_home,"input/gcamdata/inst/extdata/water/basin_to_country_mapping.csv"), skip=7)
+iso_reg<-read_csv(paste0(gcam_home,"input/gcamdata/inst/extdata/common/iso_GCAM_regID.csv"),skip=6) %>%
+  rename(country=country_name)
+
 
 modelfuture=seq(2015,2050,by=5)
 
@@ -47,22 +52,3 @@ gdp_deflator <- function(year, base_year) {
 
   as.vector(unlist(gdp[as.character(year)] / gdp[as.character(base_year)]))
 }
-#
-# listQueries(SAMout)
-#
-# [1] "fertilizer consumption by crop type"
-# [2] "P_fertilizer consumption by crop type"
-# [3] "ag production by crop type"
-# [4] "ag production by subsector (land use region)"
-# [5] "Basin level available runoff"
-# [6] "Water withdrawals by water source (runoff vs. groundwater)"
-# [7] "land allocation by crop"
-# [8] "irrigation water withdrawals by crop type and land region"
-# [9] "supply of all markets"
-# [10] "ag commodity prices"
-# [11] "GDP per capita PPP by region"
-# [12] "population by region"
-# [13] "water withdrawals by sector"
-# [14] "CO2 emissions by sector (no bio)"
-# [15] "GDP MER by region"
-# [16] "outputs by sector"

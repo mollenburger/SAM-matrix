@@ -1,0 +1,14 @@
+biomass
+Units:
+  Price: 1975$/GJ
+  Production: EJ
+
+allcrops
+Units:
+  Price: 1975$/kg
+  Production: Mt
+
+forest
+Units:
+  Price: 1975$/m3
+  Production: billion m3

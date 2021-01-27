@@ -1,0 +1,13 @@
+name: SAM-matrix
+title: SAM-matrix
+username:
+account: mollenburger
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3471105
+bundleId: 4092886
+url: https://mollenburger.shinyapps.io/SAM-matrix/
+when: 1610579693.27826
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|agtrade.R|db_extract.R|dummy.R|income.R|landuse.R|nutbal.R|prep_for_shiny.R|proj_load.R|README.md|regions.csv|SAM_querylist.xml|water.R|inputs

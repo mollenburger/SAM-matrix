@@ -16,10 +16,9 @@ forest_change %>% select(scenario,region,year,forest_change,forest_frac) %>%
   pivot_longer(-c(scenario,region,year),names_to='variable') %>%
   mutate(Unit='thous km2')->forest_plot
 
-tot_gross %>% pivot_longer(-c(scenario,region,year,Unit),names_to='variable') %>%
-  select(scenario,region,year,variable,value,Unit)->grosscrops
 
-region_vals<-NPsur %>% bind_rows(forest_plot) %>% bind_rows(grosscrops) %>%
+region_vals<-NPsur %>% bind_rows(forest_plot) %>% bind_rows(ghg_totals) %>%
+  bind_rows(exportpct) %>% bind_rows(AgLabProd) %>% bind_rows(food_afford) %>%
   left_join(GCAMreg, by = "region")
 
 regions<-st_read('~/Dropbox/JGCRI/Geospatial/GCAM 32 (with Taiwan)/regions_plot.shp')
